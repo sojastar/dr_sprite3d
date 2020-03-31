@@ -31,14 +31,20 @@ def setup(args)
   args.state.renderer   = Engine3D::Render.new 1280, 720, args.state.camera, 1.0, 300.0
 
   #args.state.scene      = Engine3D::Scene.load 'sprite3dengine/data/scenes/debug.rb'
-  #args.state.scene      = Engine3D::Scene.load 'sprite3dengine/data/scenes/scene1.rb'
-  args.state.scene      = Engine3D::Scene.load 'sprite3dengine/data/scenes/demo.rb'
+  args.state.scene      = Engine3D::Scene.load 'sprite3dengine/data/scenes/scene1.rb'
+  #args.state.scene      = Engine3D::Scene.load 'sprite3dengine/data/scenes/demo.rb'
 
-  #args.state.angle        = 0.01
+  args.state.angle        = 0.01
   #args.state.camera_angle = 0.001
 
   # DEBUG :
   #args.state.frame_counter  = 0
+  
+  args.state.static_sprites <<  Array.new(600) do
+                                  Engine3D::Sprite3D.new  0.0, 0.0, 100.0,
+                                                          'sprite3dengine/data/sprites/sphere_blue.png',
+                                                          16, 16
+                                end
 
   args.state.setup_done = true
 
@@ -59,16 +65,11 @@ def tick(args)
   
   # 1. GAME LOGIC :
 
-  #args.state.scene.bodies.each do |body|
-  #  body.rotate_absolute( { :x => args.state.angle, :y => 2*args.state.angle, :z => 1.5*args.state.angle } )
+  args.state.scene.bodies.each do |body|
+    body.rotate_absolute( { :x => args.state.angle, :y => 2*args.state.angle, :z => 1.5*args.state.angle } )
 
   #  args.state.camera.rotate_y args.state.camera_angle
-  #  args.state.angle += 0.01
-  #end
-
-  args.state.scene.bodies[0].translate(0.0, 0.0, 0.25)
-  if args.state.scene.bodies[0].z >= -46.0 then
-    args.state.scene.bodies[0].move_to(0.0, -6.0, -50.0)
+    args.state.angle += 0.01
   end
 
 
@@ -86,21 +87,12 @@ def tick(args)
 
   ordered_render_list = render_list.flatten.sort_by { |v| v.view.z }.reverse
 
-  ordered_render_list.each do |vertex|
-    #sprite_width    = ( SPRITE_SCALE *  vertex.width / vertex.view.z.abs ).to_i 
-    #sprite_height   = ( SPRITE_SCALE * vertex.height / vertex.view.z.abs ).to_i 
-    #sprite_x_offset =  sprite_width / 2
-    #sprite_y_offset = sprite_height / 2
-    #args.outputs.sprites << [vertex.screen_x - sprite_x_offset,
-    #                         vertex.screen_y - sprite_y_offset,
-    #                         sprite_width,
-    #                         sprite_height,
-    #                         vertex.file]
-    vertex.update(SPRITE_SCALE)
-    args.outputs.sprites << vertex
-  end
+  #ordered_render_list.each do |vertex|
+  #  vertex.update(SPRITE_SCALE)
+  #  args.outputs.sprites << vertex
+  #end
 
-  #args.outputs.sprites << ordered_render_list.map { |vertex| vertex.update(SPRITE_SCALE); vertex }
+  args.outputs.sprites << ordered_render_list.map { |vertex| vertex.update(SPRITE_SCALE); vertex }
 
   # DEBUG :
   args.outputs.labels << [10, 30, "FPS: #{args.gtk.current_framerate.to_s.to_i}", 0, 0, 0, 255]
