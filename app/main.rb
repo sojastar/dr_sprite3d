@@ -34,8 +34,8 @@ def setup(args)
   args.state.renderer   = Engine3D::Render.new 1280, 720, args.state.camera, 1.0, 300.0
 
   # Scene :
-  #args.state.scene      = Engine3D::Scene.load 'sprite3dengine/data/scenes/debug.rb'
-  args.state.scene      = Engine3D::Scene.load 'sprite3dengine/data/scenes/scene1.rb'
+  #args.state.scene      = Engine3D::Scene.load 'dr_sprite3d/data/scenes/debug.rb'
+  args.state.scene      = Engine3D::Scene.load 'dr_sprite3d/data/scenes/scene1.rb'
 
   # Miscellenaous :
   args.state.angle        = 0.01
