@@ -84,7 +84,7 @@ def tick(args)
 
   ordered_render_list = render_list.sort { |v1,v2| v2.view.z <=> v1.view.z }
 
-  #args.outputs.sprites << ordered_render_list.map { |vertex| vertex.z_scale(SPRITE_SCALE) }
+  #args.outputs.sprites << ordered_render_list.map { |vertex| puts vertex.class; vertex.z_scale(SPRITE_SCALE) }
   args.outputs.sprites << ordered_render_list.map do |vertex|
                                                     sprite = vertex.z_scale(SPRITE_SCALE)
 
