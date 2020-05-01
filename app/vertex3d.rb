@@ -15,14 +15,6 @@ module Engine3D
       @screen_y = 0
     end
 
-    #def local_translate(dx,dy,dz)
-    #  @local[0]  += dx
-    #  @local[1]  += dy
-    #  @local[2]  += dz
-
-    #  @processed  = :unprocessed
-    #end
-
     def compute_world_coordinates(matrix)
       # the matrix is a matrix describing the vertex's parent body's ...
       # ... position and orientation in world space
@@ -46,6 +38,10 @@ module Engine3D
 
     def ==(other) @local == other.local end
 
+    def serialize
+      { local: @local, world: @world, view: @view }
+    end
+
     def inspect
       case @processed
       when :unprocessed
@@ -59,8 +55,11 @@ module Engine3D
         "--- local: (#{@local.x},#{@local.y},#{@local.z})\n " \
         "--- world: (#{@world.x},#{@world.y},#{@world.z})\n" \
         "--- view:  (#{@view.x},#{@view.y},#{@view.z})"
-
       end
+    end
+
+    def to_s
+      inspect
     end
   end
 end

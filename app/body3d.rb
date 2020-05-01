@@ -95,10 +95,17 @@ module Engine3D
       rotate rotations
     end
 
+    def serialize
+      { id:       object_id,
+        vertices: @vertices  }
+    end
+
     def inspect
-      s= "- body #{object_id}:\n"
-      @vertices.each.with_index { |v,i| s << "-- vertex #{i}:\n#{v.inspect}\n" }
-      s
+      serialize.to_s
+    end
+
+    def to_s
+      serialize.to_s
     end
   end
 end

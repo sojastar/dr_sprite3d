@@ -23,5 +23,18 @@ module Engine3D
       body.move_to x, y, z 
       @bodies << body 
     end
+
+    def serialize
+      { id:     object_id,
+        bodies: @bodies }
+    end
+
+    def inspect
+      serialize.to_s
+    end
+
+    def to_s
+      serialize.to_s
+    end
   end
 end
