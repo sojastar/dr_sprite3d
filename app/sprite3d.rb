@@ -1,12 +1,6 @@
 module Engine3D
   class Sprite3D < Vertex
-    attr_accessor :x, :y, :w, :h,
-                  :path, :angle,
-                  :a, :r, :g, :b,
-                  :tile_x, :tile_y, :tile_w, :tile_h,
-                  :source_x, :source_y, :source_w, :source_h,
-                  :flip_horizontally, :flip_vertically,
-                  :angle_anchor_x, :angle_anchor_y
+    attr_sprite
 
     def primitive_marker
       :sprite
