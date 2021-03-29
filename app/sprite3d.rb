@@ -1,12 +1,6 @@
 module Engine3D
   class Sprite3D < Vertex
-    attr_accessor :x, :y, :w, :h,
-                  :path, :angle,
-                  :a, :r, :g, :b,
-                  :tile_x, :tile_y, :tile_w, :tile_h,
-                  :source_x, :source_y, :source_w, :source_h,
-                  :flip_horizontally, :flip_vertically,
-                  :angle_anchor_x, :angle_anchor_y
+    attr_sprite
 
     def primitive_marker
       :sprite
@@ -24,6 +18,7 @@ module Engine3D
       @y      = -720
       @w      = 15
       @h      = 15
+      @angle  = 0
       @r      = 255
       @g      = 255
       @b      = 255
@@ -32,6 +27,14 @@ module Engine3D
 
     def sprite
       self
+    end
+
+    def rotate(delta_angle)
+      @angle  = ( @angle + delta_angle ) % 360
+    end
+
+    def rotate_absolute(angle)
+      @angle  = angle
     end
 
     def z_scale(sprite_scale)

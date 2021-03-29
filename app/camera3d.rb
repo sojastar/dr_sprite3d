@@ -48,10 +48,10 @@ module Engine3D
                                                     [@direction.x, @direction.y, @direction.z, 0.0],
                                                     [         0.0,          0.0,          0.0, 1.0]]) 
 
-        translation_matrix  = Engine3D::Matrix.new([[1.0, 0.0, 0.0, -@direction.x],
-                                                    [0.0, 1.0, 0.0, -@direction.y],
-                                                    [0.0, 0.0, 1.0, -@direction.z],
-                                                    [0.0, 0.0, 0.0,           1.0]])
+        translation_matrix  = Engine3D::Matrix.new([[1.0, 0.0, 0.0, -@position.x],
+                                                    [0.0, 1.0, 0.0, -@position.y],
+                                                    [0.0, 0.0, 1.0, -@position.z],
+                                                    [0.0, 0.0, 0.0,          1.0]])
 
         @view_matrix        = rotation_matrix * translation_matrix
         @view_matrix_status = :computed

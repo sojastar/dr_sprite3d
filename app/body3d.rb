@@ -7,22 +7,20 @@ module Engine3D
       @world_matrix = Engine3D::Matrix.identity
       @vertices     = []
 
+      @behaviour    = ->(args) {}
+
       instance_eval &setup_block
     end 
 
     def self.load(filepath)
-      body_description = nil
-      #File.open(filepath, 'r') { |f| body_description = f.read }
-      f=File.open(filepath, 'r')
-      body_description = f.read
-      f.close
-
+      body_description  = $gtk.read_file filepath
       instance_eval body_description
     end
 
     def add_vertex(vertex)
       @vertices << vertex
     end
+
 
     def x() @world_matrix[0,3] end
     def y() @world_matrix[1,3] end
@@ -93,6 +91,14 @@ module Engine3D
     def rotate_absolute(rotations)
       clear_rotation
       rotate rotations
+    end
+
+    def add_behaviour(&block)
+      @behaviour  = block
+    end
+
+    def update(args)
+      instance_exec(args, &@behaviour)
     end
 
     def serialize

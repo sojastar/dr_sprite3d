@@ -9,12 +9,7 @@ module Engine3D
     end
 
     def self.load(filepath)
-      scene_description = nil
-      #File.open(filepath, 'r') { |f| body_description = f.read }
-      f=File.open(filepath, 'r')
-      scene_description = f.read
-      f.close
-
+      scene_description = $gtk.read_file filepath
       instance_eval scene_description
     end
 

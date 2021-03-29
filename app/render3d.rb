@@ -11,10 +11,10 @@ module Engine3D
       @half_height  = @height / 2
       @ratio        = width.to_f / height
 
-      @camera = camera
+      @camera       = camera
 
-      @near   = near
-      @far    = far
+      @near         = near
+      @far          = far
     end
 
     def vertex_in_frustum?(vertex)
@@ -38,7 +38,7 @@ module Engine3D
     end
 
     def project_vertices(vertices)
-      @camera.reset_view_matrix
+      #@camera.reset_view_matrix
 
       vertices.each do |vertex|
         vertex.compute_view_coordinates(@camera.view_matrix)

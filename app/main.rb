@@ -35,7 +35,7 @@ def setup(args)
 
   # Scene :
   #args.state.scene      = Engine3D::Scene.load 'dr_sprite3d/data/scenes/debug.rb'
-  args.state.scene      = Engine3D::Scene.load 'dr_sprite3d/data/scenes/scene1.rb'
+  args.state.scene      = Engine3D::Scene.load 'data/scenes/scene1.rb'
 
   # Miscellenaous :
   args.state.angle        = 0.01
