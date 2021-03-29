@@ -33,22 +33,22 @@ module Engine3D
       self
     end
 
-    #def draw_override(ffi_draw)
-    #  draw_width  = ( sprite_scale *  @width / @view.z.abs ).to_i
-    #  draw_height = ( sprite_scale * @height / @view.z.abs ).to_i 
+    def draw_override(ffi_draw)
+      draw_width  = ( sprite_scale *  @width / @view.z.abs ).to_i
+      draw_height = ( sprite_scale * @height / @view.z.abs ).to_i 
 
-    #  ffi_draw.draw_sprite  @x - ( draw_width >> 1 ),
-    #                        @y - ( draw_height >> 1),
-    #                        draw_width,
-    #                        draw_height,
-    #                        @path,
-    #                        @angle,
-    #                        255, 255, 255, 255, 
-    #                        false, false,
-    #                        nil, nil, nil, nil,
-    #                        0.0, 0.0,
-    #                        @source_x, @source_y, @source_w, @source_h
-    #end
+      ffi_draw.draw_sprite  @x - ( draw_width >> 1 ),
+                            @y - ( draw_height >> 1),
+                            draw_width,
+                            draw_height,
+                            @path,
+                            @angle,
+                            255, 255, 255, 255, 
+                            false, false,
+                            nil, nil, nil, nil,
+                            0.0, 0.0,
+                            @source_x, @source_y, @source_w, @source_h
+    end
 
     def rotate(delta_angle)
       @angle  = ( @angle + delta_angle ) % 360
