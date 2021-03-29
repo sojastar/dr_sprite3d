@@ -7,13 +7,13 @@ Engine3D::Body.new do
       add_vertex Engine3D::Sprite3D.new 2 * i - size + 1,
                                         2 * j - size + 1,
                                         -1.0 - size,
-                                        'data/sprites/sphere_blue.png',
-                                        16, 16
+                                        'data/sprites/spheres_all.png',
+                                        0, 0, 16, 16
       add_vertex Engine3D::Sprite3D.new 2 * i - size + 1,
                                         2 * j - size + 1,
                                         1.0 + size,
-                                        'data/sprites/sphere_blue.png',
-                                        16, 16
+                                        'data/sprites/spheres_all.png',
+                                        0, 0, 16, 16
     end
   end
 
@@ -23,13 +23,13 @@ Engine3D::Body.new do
       add_vertex Engine3D::Sprite3D.new -1.0 - size,
                                         2 * i - size + 1,
                                         2 * j - size + 1,
-                                        'data/sprites/sphere_green.png',
-                                        16, 16
+                                        'data/sprites/spheres_all.png',
+                                        16, 0, 16, 16
       add_vertex Engine3D::Sprite3D.new 1.0 + size,
                                         2 * i - size + 1,
                                         2 * j - size + 1,
-                                        'data/sprites/sphere_green.png',
-                                        16, 16
+                                        'data/sprites/spheres_all.png',
+                                        16, 0, 16, 16
     end
   end
 
@@ -39,13 +39,13 @@ Engine3D::Body.new do
       add_vertex Engine3D::Sprite3D.new 2 * i - size + 1,
                                         -1.0 - size,
                                         2 * j - size + 1,
-                                        'data/sprites/sphere_red.png',
-                                        16, 16
+                                        'data/sprites/spheres_all.png',
+                                        32, 0, 16, 16
       add_vertex Engine3D::Sprite3D.new 2 * i - size + 1,
                                         1.0 + size,
                                         2 * j - size + 1,
-                                        'data/sprites/sphere_red.png',
-                                        16, 16
+                                        'data/sprites/spheres_all.png',
+                                        32, 0, 16, 16
     end
   end
 end

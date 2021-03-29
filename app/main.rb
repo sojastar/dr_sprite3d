@@ -88,11 +88,15 @@ def tick(args)
   args.outputs.sprites << ordered_render_list.map do |vertex|
                                                     sprite = vertex.z_scale(SPRITE_SCALE)
 
-                                                    { x:      sprite.x,
-                                                      y:      sprite.y,
-                                                      w:      sprite.w,
-                                                      h:      sprite.h,
-                                                      path:   sprite.path }
+                                                    { x:        sprite.x,
+                                                      y:        sprite.y,
+                                                      w:        sprite.w,
+                                                      h:        sprite.h,
+                                                      path:     sprite.path,
+                                                      source_x: sprite.source_x,
+                                                      source_y: sprite.source_y,
+                                                      source_w: sprite.source_w,
+                                                      source_h: sprite.source_h }
                                                   end
 
   # DEBUG :
