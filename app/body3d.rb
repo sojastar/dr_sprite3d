@@ -1,11 +1,11 @@
 module Engine3D
   class Body
     attr_accessor :world_matrix,
-                  :vertices
+                  :sprites
 
     def initialize(&setup_block)
       @world_matrix = Engine3D::Matrix.identity
-      @vertices     = []
+      @sprites      = []
 
       @behaviour    = ->(args) {}
 
@@ -17,8 +17,8 @@ module Engine3D
       instance_eval body_description
     end
 
-    def add_vertex(vertex)
-      @vertices << vertex
+    def add_sprite(sprite)
+      @sprites << sprite
     end
 
 
@@ -103,7 +103,7 @@ module Engine3D
 
     def serialize
       { id:       object_id,
-        vertices: @vertices  }
+        sprites:  @sprites  }
     end
 
     def inspect

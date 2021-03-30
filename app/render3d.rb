@@ -4,7 +4,7 @@ module Engine3D
                   :camera,
                   :near, :far
 
-    def initialize(width, height, camera, near, far)
+    def initialize(width,height,camera,near,far)
       @width        = width
       @height       = height
       @half_width   = @width  / 2
@@ -35,6 +35,19 @@ module Engine3D
       else
         vertex.in_frustum = false
       end
+    end
+
+    def render_scene(args,scene)
+      camera.reset_view_matrix
+
+      scene.bodies.each do |body|
+        body.sprites.each do |sprite|
+          sprite.compute_world_coordinates body.world_matrix
+          project_vertex sprite
+        end
+      end
+
+      args.outputs.static_sprites.sort! { |v1,v2| v2.view.z <=> v1.view.z }
     end
 
     def project_vertices(vertices)

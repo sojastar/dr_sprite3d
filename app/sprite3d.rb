@@ -1,10 +1,6 @@
 module Engine3D
   class Sprite3D < Vertex
-    attr_sprite
-
-    def primitive_marker
-      :sprite
-    end
+    attr_accessor :x, :y, :scale
     
     def initialize(x,y,z,atlas,atlas_x,atlas_y,atlas_w,atlas_h)
       super(x,y,z)
@@ -16,8 +12,8 @@ module Engine3D
 
       @x        = -1280
       @y        = -720
-      @w        = 15
-      @h        = 15
+      @w        = 16
+      @h        = 16
       @angle    = 0
       @r        = 255
       @g        = 255
@@ -27,6 +23,14 @@ module Engine3D
       @source_y = atlas_y
       @source_w = atlas_w
       @source_h = atlas_h
+
+      @scale    = 1
+    end
+
+    def set_scale(scale)
+      @scale    = scale
+      @width   *= scale
+      @height  *= scale
     end
 
     def sprite
@@ -34,20 +38,22 @@ module Engine3D
     end
 
     def draw_override(ffi_draw)
-      draw_width  = ( sprite_scale *  @width / @view.z.abs ).to_i
-      draw_height = ( sprite_scale * @height / @view.z.abs ).to_i 
+      draw_width  = (  @width / @view.z.abs ).to_i
+      draw_height = ( @height / @view.z.abs ).to_i 
 
-      ffi_draw.draw_sprite  @x - ( draw_width >> 1 ),
-                            @y - ( draw_height >> 1),
-                            draw_width,
-                            draw_height,
-                            @path,
-                            @angle,
-                            255, 255, 255, 255, 
-                            false, false,
-                            nil, nil, nil, nil,
-                            0.0, 0.0,
-                            @source_x, @source_y, @source_w, @source_h
+      if in_frustum then
+        ffi_draw.draw_sprite_3  @x - ( draw_width >> 1 ),
+                                @y - ( draw_height >> 1),
+                                draw_width,
+                                draw_height,
+                                @path,
+                                @angle,
+                                255, 255, 255, 255, 
+                                false, false,
+                                nil, nil, nil, nil,
+                                0.0, 0.0,
+                                @source_x, @source_y, @source_w, @source_h
+      end
     end
 
     def rotate(delta_angle)
@@ -68,9 +74,9 @@ module Engine3D
     end
 
     def serialize
-      { path:   path,
-        width:  width,
-        height: height }
+      { path:   @path,
+        width:  @width,
+        height: @height }
     end
 
     def inspect

@@ -31,7 +31,7 @@ module Engine3D
 
     def reset() @processed = :unprocessed end
 
-    def ==(other) @local == other.local end
+    #def ==(other) @local == other.local end
 
     def serialize
       { local: @local, world: @world, view: @view }
@@ -50,6 +50,8 @@ module Engine3D
         "--- local: (#{@local.x},#{@local.y},#{@local.z})\n " \
         "--- world: (#{@world.x},#{@world.y},#{@world.z})\n" \
         "--- view:  (#{@view.x},#{@view.y},#{@view.z})"
+      else
+        'nothing for this vertex'
       end
     end
 
